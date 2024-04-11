@@ -1,0 +1,12 @@
+---
+- include_task: rustup.yaml
+
+- name: Cargo install packages (noopt)
+  shell: "cargo install {{ item }}"
+  loop: "{{ cargopkgs.noopt }}"
+- name: Cargo install packages (noopt)
+  shell: "cargo install --locked {{ item }}"
+  loop: "{{ cargopkgs.locked }}"
+- name: Cargo install packages (git)
+  shell: "cargo install --git {{ item }}"
+  loop: "{{ cargopkgs.git }}"

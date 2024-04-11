@@ -1,0 +1,24 @@
+---
+- set_fact:
+  current_user: "{{ lookup('env', 'USER') }}"
+- user:
+    name: "{{ current_user }}"
+  check_mode: true
+  register: user_props
+
+- shell: command -v cargo
+  register: cargo_exists
+  ignore_errors: yes
+
+- name: Download Installer
+  when: cargo_exists is failed
+  get_url:
+    url: https://sh.rustup.rs
+    dest: "{{ user_props.home }}/tmp/sh.rustup.rs"
+    mode: '0770'
+    force: 'yes'
+
+- name: Install rust and cargo
+  when: cargo_exists is failed
+  shell: "{{ user_props.home }}/tmp/sh.rustup.rs -y"
+

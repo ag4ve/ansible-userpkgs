@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: userpkgs
+  author: ag4ve
+  description: User packages install and removal
+  company: IOSwitch
+  license: MIT
+  min_ansible_version: 2.12.0
+  platform:
+    - name: Ubuntu
+      versions:
+        - all
+dependencies: []
+
